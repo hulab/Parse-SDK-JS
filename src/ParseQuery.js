@@ -1222,17 +1222,17 @@ export default class ParseQuery {
     if (typeof search === 'undefined' || !search) {
       throw new Error('You have to add one string to search.');
     }
-    let options = { $search: { $term: search } };
-    if (typeof language !== 'undefined') {
-      options['$language'] = { $term: language };
+    let options = { $term: search };
+    if (language) {
+      options['$language'] = language;
     }
-    if (typeof caseSensitive !== 'undefined') {
-      options['$caseSensitive'] = { $term: caseSensitive };
+    if (caseSensitive) {
+      options['$caseSensitive'] = caseSensitive;
     }
-    if (typeof diacriticSensitive !== 'undefined') {
-      options['$diacriticSensitive'] = { $term: diacriticSensitive };
+    if (diacriticSensitive) {
+      options['$diacriticSensitive'] = diacriticSensitive;
     }
-    this._addCondition(key, '$text', options);
+    this._addCondition(key, '$text', { $search: options });
     return this;
   }
 }

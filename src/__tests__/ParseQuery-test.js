@@ -1416,7 +1416,7 @@ describe('ParseQuery', () => {
     var testObject;
     return q.find().then((results) => {
       testObject = results[0];
-
+      
       expect(testObject.get("name")).toBe("Name");
       expect(testObject.get("other")).toBe("other");
       expect(testObject.has("tbd")).toBe(true);
@@ -1591,11 +1591,11 @@ describe('ParseQuery', () => {
     query.fullTextSearch('size', 'small');
 
     expect(query.toJSON()).toEqual({
-      "where" : {
-        "size": {
-          "$text": {
-            "$search": {
-              "$term": "small"
+      where: {
+        size: {
+          $text: {
+            $search: {
+              $term: "small"
             }
           }
         }
@@ -1609,20 +1609,14 @@ describe('ParseQuery', () => {
     query.fullTextSearch('size', 'medium', 'en', false, true);
 
     expect(query.toJSON()).toEqual({
-      "where" : {
-        "size": {
-          "$text": {
-            "$search": {
-              "$term": "medium"
-            },
-            "$language": {
-              "$term": "en"
-            },
-            "$caseSensitive": {
-                "$term": false
-            },
-            "$diacriticSensitive": {
-                "$term": true
+      where: {
+        size: {
+          $text: {
+            $search: {
+              $term: "medium",
+              $language: "en",
+              $caseSensitive: false,
+              $diacriticSensitive: true
             }
           }
         }
