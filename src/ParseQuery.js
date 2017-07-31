@@ -1235,6 +1235,17 @@ export default class ParseQuery {
     this._addCondition(key, '$text', { $search: options });
     return this;
   }
+  
+  /**
+   * Method to sort the full text search by text score
+   * @method sortByTextScore
+   * @return {Parse.Query} Returns the query, so you can chain this call.
+   */
+  sortByTextScore() {
+    this.ascending('$score');
+    this.select(['$score']);
+    return this;
+  }
 }
 
 var DefaultController = {
