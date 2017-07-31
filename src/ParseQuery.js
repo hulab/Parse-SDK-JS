@@ -1164,7 +1164,7 @@ export default class ParseQuery {
     return this;
   }
 
-fullTextSearch(key: string, search: string, language: string, caseSensitive: boolean, diacriticSensitive: boolean): ParseQuery {
+fullTextSearch(): ParseQuery {
 return this;
 }
 
