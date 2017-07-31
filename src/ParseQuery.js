@@ -1164,6 +1164,10 @@ export default class ParseQuery {
     return this;
   }
 
+fullTextSearch(key: string, search: string, language: string, caseSensitive: boolean, diacriticSensitive: boolean): ParseQuery {
+return this;
+}
+
   /**
    * Subscribe this query to get liveQuery updates
    * @method subscribe
@@ -1202,49 +1206,6 @@ export default class ParseQuery {
     var query = new ParseQuery(className);
     query._orQuery(queries);
     return query;
-  }
-
-  /**
-   * Method to find by full text.
-   * The key and the search fields are required the others are optionals.
-   * @method fullTextSearch
-   * @param {String} key The key to structure the where query
-   * @param {String} search The string to search
-   * @param {String} language Determine the list of stop words
-   * @param {Boolean} caseSensitive Dis/en-able the case sensitive search
-   * @param {Boolean} diacriticSensitive Dis/en-able diacritic sensitive search
-   * @return {Parse.Query} Returns the query, so you can chain this call.
-   */
-  fullTextSearch(key: string, search: string, language: string, caseSensitive: boolean, diacriticSensitive: boolean): ParseQuery {
-    if (typeof key === 'undefined' || !key) {
-      throw new Error('A key is required.');
-    }
-    if (typeof search === 'undefined' || !search) {
-      throw new Error('You have to add one string to search.');
-    }
-    let options = { $term: search };
-    if (language) {
-      options['$language'] = language;
-    }
-    if (caseSensitive) {
-      options['$caseSensitive'] = caseSensitive;
-    }
-    if (diacriticSensitive) {
-      options['$diacriticSensitive'] = diacriticSensitive;
-    }
-    this._addCondition(key, '$text', { $search: options });
-    return this;
-  }
-  
-  /**
-   * Method to sort the full text search by text score
-   * @method sortByTextScore
-   * @return {Parse.Query} Returns the query, so you can chain this call.
-   */
-  sortByTextScore() {
-    this.ascending('$score');
-    this.select(['$score']);
-    return this;
   }
 }
 
