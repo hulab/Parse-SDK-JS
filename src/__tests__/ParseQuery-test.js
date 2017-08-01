@@ -1624,4 +1624,27 @@ describe('ParseQuery', () => {
     });
 
   });
+  
+  it('add the score for the full text search', () => {
+    let query = new ParseQuery('Item');
+    
+    query.fullTextSearch('size', 'medium', 'fr');
+    query.sortByTextScore();
+    
+    expect(query.toJSON()).toEqual({
+      where: {
+        size: {
+          $text: {
+            $search: {
+              $term: "medium",
+              $language: "fr"
+            }
+          }
+        }
+      },
+      keys : "$score",
+      order : "$score"
+    });
+    
+  });
 });

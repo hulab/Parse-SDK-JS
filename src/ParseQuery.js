@@ -1032,17 +1032,16 @@ export default class ParseQuery {
       throw new Error('You have to add one string to search.');
     }
     var options = { '$term': search };
-    if (language) {
+    if (typeof language !== "undefined" || language !== null) {
       options['$language'] = language;
     }
-    if (caseSensitive) {
+    if (typeof caseSensitive !== "undefined" || caseSensitive !== null) {
       options['$caseSensitive'] = caseSensitive;
     }
-    if (diacriticSensitive) {
+    if (typeof diacriticSensitive !== "undefined" || diacriticSensitive !== null) {
       options['$diacriticSensitive'] = diacriticSensitive;
     }
-    this._addCondition(key, '$text', { '$search': options });
-    return this;
+    return this._addCondition(key, '$text', { '$search': options });
   }
 
   /** Query Orderings **/
