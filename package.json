@@ -1,19 +1,13 @@
 {
-  "name": "parse",
+  "name": "hulab_parsejs",
   "version": "1.10.1",
-  "description": "The Parse JavaScript SDK",
-  "homepage": "https://www.parse.com",
-  "keywords": [
-    "cloud",
-    "mobile",
-    "api"
-  ],
+  "description": "A Hulab fork of Parse JavaScript SDK",
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ParsePlatform/Parse-SDK-JS"
+    "url": "https://github.com/Hulab/Parse-SDK-JS"
   },
-  "bugs": "https://github.com/ParsePlatform/Parse-SDK-JS/issues",
+  "bugs": "https://github.com/Hulab/Parse-SDK-JS/issues",
   "files": [
     "index.js",
     "node.js",
