@@ -1,13 +1,19 @@
 {
-  "name": "hulab_parsejs",
-  "version": "1.10.1",
-  "description": "A Hulab fork of Parse JavaScript SDK",
+  "name": "parse",
+  "version": "1.10.0-hulab",
+  "description": "The Parse JavaScript SDK",
+  "homepage": "https://www.parse.com",
+  "keywords": [
+    "cloud",
+    "mobile",
+    "api"
+  ],
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Hulab/Parse-SDK-JS"
+    "url": "https://github.com/ParsePlatform/Parse-SDK-JS"
   },
-  "bugs": "https://github.com/Hulab/Parse-SDK-JS/issues",
+  "bugs": "https://github.com/ParsePlatform/Parse-SDK-JS/issues",
   "files": [
     "index.js",
     "node.js",
@@ -64,9 +70,7 @@
       "/node_modules/",
       "/test_helpers/"
     ],
-    "transform": {
-      ".*": "./babel-jest.js"
-    },
+    "transform": {".*": "./babel-jest.js"},
     "setupTestFrameworkScriptFile": "./setup-jest.js"
   }
 }
