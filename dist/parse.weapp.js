@@ -13247,19 +13247,55 @@ var ParseQuery = /*#__PURE__*/function () {
       var previousResults = [];
       return (0, _promiseUtils.continueWhile)(function () {
         return !finished;
-      }, function () {
-        return _promise.default.all([(0, _find.default)(query).call(query, findOptions), _promise.default.resolve(callback(previousResults))]).then(function (_ref) {
-          var _ref2 = (0, _slicedToArray2.default)(_ref, 1),
-              results = _ref2[0];
+      }, /*#__PURE__*/(0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2() {
+        var _yield$Promise$all, _yield$Promise$all2, results;
 
-          if (results.length == 0) {
-            finished = true;
-          } else {
-            query.greaterThan('objectId', results[results.length - 1].id);
-            previousResults = results;
+        return _regenerator.default.wrap(function (_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _context8.next = 2;
+                return _promise.default.all([(0, _find.default)(query).call(query, findOptions), _promise.default.resolve(callback(previousResults))]);
+
+              case 2:
+                _yield$Promise$all = _context8.sent;
+                _yield$Promise$all2 = (0, _slicedToArray2.default)(_yield$Promise$all, 1);
+                results = _yield$Promise$all2[0];
+
+                if (!(results.length >= query._limit)) {
+                  _context8.next = 10;
+                  break;
+                }
+
+                query.greaterThan('objectId', results[results.length - 1].id);
+                previousResults = results;
+                _context8.next = 17;
+                break;
+
+              case 10:
+                if (!(results.length > 0)) {
+                  _context8.next = 16;
+                  break;
+                }
+
+                _context8.next = 13;
+                return _promise.default.resolve(callback(results));
+
+              case 13:
+                finished = true;
+                _context8.next = 17;
+                break;
+
+              case 16:
+                finished = true;
+
+              case 17:
+              case "end":
+                return _context8.stop();
+            }
           }
-        });
-      });
+        }, _callee2);
+      })));
     }
     /**
      * Iterates over each result of a query, calling a callback for each one. If
@@ -13370,7 +13406,7 @@ var ParseQuery = /*#__PURE__*/function () {
   }, {
     key: "map",
     value: function () {
-      var _map = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2(callback
+      var _map = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3(callback
       /*: (currentObject: ParseObject, index: number, query: ParseQuery) => any*/
       , options
       /*:: ?: BatchOptions*/
@@ -13378,13 +13414,13 @@ var ParseQuery = /*#__PURE__*/function () {
         var _this5 = this;
 
         var array, index;
-        return _regenerator.default.wrap(function (_context8) {
+        return _regenerator.default.wrap(function (_context9) {
           while (1) {
-            switch (_context8.prev = _context8.next) {
+            switch (_context9.prev = _context9.next) {
               case 0:
                 array = [];
                 index = 0;
-                _context8.next = 4;
+                _context9.next = 4;
                 return this.each(function (object) {
                   return _promise.default.resolve(callback(object, index, _this5)).then(function (result) {
                     array.push(result);
@@ -13393,14 +13429,14 @@ var ParseQuery = /*#__PURE__*/function () {
                 }, options);
 
               case 4:
-                return _context8.abrupt("return", array);
+                return _context9.abrupt("return", array);
 
               case 5:
               case "end":
-                return _context8.stop();
+                return _context9.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee3, this);
       }));
 
       return function () {
@@ -13433,7 +13469,7 @@ var ParseQuery = /*#__PURE__*/function () {
   }, {
     key: "reduce",
     value: function () {
-      var _reduce = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3(callback
+      var _reduce = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4(callback
       /*: (accumulator: any, currentObject: ParseObject, index: number) => any*/
       , initialValue
       /*: any*/
@@ -13441,13 +13477,13 @@ var ParseQuery = /*#__PURE__*/function () {
       /*:: ?: BatchOptions*/
       ) {
         var accumulator, index;
-        return _regenerator.default.wrap(function (_context9) {
+        return _regenerator.default.wrap(function (_context10) {
           while (1) {
-            switch (_context9.prev = _context9.next) {
+            switch (_context10.prev = _context10.next) {
               case 0:
                 accumulator = initialValue;
                 index = 0;
-                _context9.next = 4;
+                _context10.next = 4;
                 return this.each(function (object) {
                   // If no initial value was given, we take the first object from the query
                   // as the initial value and don't call the callback with it.
@@ -13465,21 +13501,21 @@ var ParseQuery = /*#__PURE__*/function () {
 
               case 4:
                 if (!(index === 0 && initialValue === undefined)) {
-                  _context9.next = 6;
+                  _context10.next = 6;
                   break;
                 }
 
                 throw new TypeError("Reducing empty query result set with no initial value");
 
               case 6:
-                return _context9.abrupt("return", accumulator);
+                return _context10.abrupt("return", accumulator);
 
               case 7:
               case "end":
-                return _context9.stop();
+                return _context10.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee4, this);
       }));
 
       return function () {
@@ -13512,7 +13548,7 @@ var ParseQuery = /*#__PURE__*/function () {
   }, {
     key: "filter",
     value: function () {
-      var _filter = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4(callback
+      var _filter = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5(callback
       /*: (currentObject: ParseObject, index: number, query: ParseQuery) => boolean*/
       , options
       /*:: ?: BatchOptions*/
@@ -13520,13 +13556,13 @@ var ParseQuery = /*#__PURE__*/function () {
         var _this6 = this;
 
         var array, index;
-        return _regenerator.default.wrap(function (_context10) {
+        return _regenerator.default.wrap(function (_context11) {
           while (1) {
-            switch (_context10.prev = _context10.next) {
+            switch (_context11.prev = _context11.next) {
               case 0:
                 array = [];
                 index = 0;
-                _context10.next = 4;
+                _context11.next = 4;
                 return this.each(function (object) {
                   return _promise.default.resolve(callback(object, index, _this6)).then(function (flag) {
                     if (flag) {
@@ -13538,14 +13574,14 @@ var ParseQuery = /*#__PURE__*/function () {
                 }, options);
 
               case 4:
-                return _context10.abrupt("return", array);
+                return _context11.abrupt("return", array);
 
               case 5:
               case "end":
-                return _context10.stop();
+                return _context11.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee5, this);
       }));
 
       return function () {
@@ -14364,13 +14400,13 @@ var ParseQuery = /*#__PURE__*/function () {
       }
 
       (0, _forEach.default)(keys).call(keys, function (key) {
-        var _context11;
+        var _context12;
 
         if ((0, _isArray.default)(key)) {
           key = key.join();
         }
 
-        _this7._order = (0, _concat.default)(_context11 = _this7._order).call(_context11, key.replace(/\s/g, '').split(','));
+        _this7._order = (0, _concat.default)(_context12 = _this7._order).call(_context12, key.replace(/\s/g, '').split(','));
       });
       return this;
     }
@@ -14420,13 +14456,13 @@ var ParseQuery = /*#__PURE__*/function () {
       }
 
       (0, _forEach.default)(keys).call(keys, function (key) {
-        var _context12, _context13;
+        var _context13, _context14;
 
         if ((0, _isArray.default)(key)) {
           key = key.join();
         }
 
-        _this8._order = (0, _concat.default)(_context12 = _this8._order).call(_context12, (0, _map2.default)(_context13 = key.replace(/\s/g, '').split(',')).call(_context13, function (k) {
+        _this8._order = (0, _concat.default)(_context13 = _this8._order).call(_context13, (0, _map2.default)(_context14 = key.replace(/\s/g, '').split(',')).call(_context14, function (k) {
           return '-' + k;
         }));
       });
@@ -14527,9 +14563,9 @@ var ParseQuery = /*#__PURE__*/function () {
 
       (0, _forEach.default)(keys).call(keys, function (key) {
         if ((0, _isArray.default)(key)) {
-          var _context14;
+          var _context15;
 
-          _this9._include = (0, _concat.default)(_context14 = _this9._include).call(_context14, key);
+          _this9._include = (0, _concat.default)(_context15 = _this9._include).call(_context15, key);
         } else {
           _this9._include.push(key);
         }
@@ -14576,9 +14612,9 @@ var ParseQuery = /*#__PURE__*/function () {
 
       (0, _forEach.default)(keys).call(keys, function (key) {
         if ((0, _isArray.default)(key)) {
-          var _context15;
+          var _context16;
 
-          _this10._select = (0, _concat.default)(_context15 = _this10._select).call(_context15, key);
+          _this10._select = (0, _concat.default)(_context16 = _this10._select).call(_context16, key);
         } else {
           _this10._select.push(key);
         }
@@ -14608,9 +14644,9 @@ var ParseQuery = /*#__PURE__*/function () {
 
       (0, _forEach.default)(keys).call(keys, function (key) {
         if ((0, _isArray.default)(key)) {
-          var _context16;
+          var _context17;
 
-          _this11._exclude = (0, _concat.default)(_context16 = _this11._exclude).call(_context16, key);
+          _this11._exclude = (0, _concat.default)(_context17 = _this11._exclude).call(_context17, key);
         } else {
           _this11._exclude.push(key);
         }
@@ -14652,45 +14688,45 @@ var ParseQuery = /*#__PURE__*/function () {
   }, {
     key: "subscribe",
     value: function () {
-      var _subscribe = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5(sessionToken
+      var _subscribe = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6(sessionToken
       /*:: ?: string*/
       ) {
         var currentUser, liveQueryClient, subscription;
-        return _regenerator.default.wrap(function (_context17) {
+        return _regenerator.default.wrap(function (_context18) {
           while (1) {
-            switch (_context17.prev = _context17.next) {
+            switch (_context18.prev = _context18.next) {
               case 0:
-                _context17.next = 2;
+                _context18.next = 2;
                 return _CoreManager.default.getUserController().currentUserAsync();
 
               case 2:
-                currentUser = _context17.sent;
+                currentUser = _context18.sent;
 
                 if (!sessionToken) {
                   sessionToken = currentUser ? currentUser.getSessionToken() : undefined;
                 }
 
-                _context17.next = 6;
+                _context18.next = 6;
                 return _CoreManager.default.getLiveQueryController().getDefaultLiveQueryClient();
 
               case 6:
-                liveQueryClient = _context17.sent;
+                liveQueryClient = _context18.sent;
 
                 if (liveQueryClient.shouldOpen()) {
                   liveQueryClient.open();
                 }
 
                 subscription = liveQueryClient.subscribe(this, sessionToken);
-                return _context17.abrupt("return", subscription.subscribePromise.then(function () {
+                return _context18.abrupt("return", subscription.subscribePromise.then(function () {
                   return subscription;
                 }));
 
               case 10:
               case "end":
-                return _context17.stop();
+                return _context18.stop();
             }
           }
-        }, _callee5, this);
+        }, _callee6, this);
       }));
 
       return function () {
