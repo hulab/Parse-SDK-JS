@@ -929,7 +929,7 @@ class ParseQuery {
     }, async () => {
       const [results] = await Promise.all([
         query.find(findOptions),
-        Promise.resolve(callback(previousResults))
+        Promise.resolve(previousResults.length > 0 && callback(previousResults))
       ]);
       if (results.length >= query._limit) {
         query.greaterThan('objectId', results[results.length - 1].id);

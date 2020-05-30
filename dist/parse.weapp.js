@@ -13255,7 +13255,7 @@ var ParseQuery = /*#__PURE__*/function () {
             switch (_context8.prev = _context8.next) {
               case 0:
                 _context8.next = 2;
-                return _promise.default.all([(0, _find.default)(query).call(query, findOptions), _promise.default.resolve(callback(previousResults))]);
+                return _promise.default.all([(0, _find.default)(query).call(query, findOptions), _promise.default.resolve(previousResults.length > 0 && callback(previousResults))]);
 
               case 2:
                 _yield$Promise$all = _context8.sent;
